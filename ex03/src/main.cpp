@@ -3,6 +3,7 @@
 
 #include "Character.hpp"
 #include "Ice.hpp"
+#include "Cure.hpp"
 #include "MateriaSource.hpp"
 
 #define RESET "\033[m"
@@ -85,14 +86,14 @@ void test_materia_source() {
     printSubtitle("Test learnMateria");
     MateriaSource src;
     src.learnMateria(new Ice());
-    //src.learnMateria(new Cure());
+    src.learnMateria(new Cure());
   }
   // Test createMateria
   {
     printSubtitle("Test createMateria");
     MateriaSource src;
     src.learnMateria(new Ice());
-    //src.learnMateria(new Cure());
+    src.learnMateria(new Cure());
     AMateria* ice = src.createMateria("ice");
     AMateria* cure = src.createMateria("cure");
     AMateria* unknown = src.createMateria("unknown");
@@ -136,8 +137,8 @@ void test_character() {
     printSubtitle("Test equip");
     Character character("character");
     character.equip(new Ice());
-    //character.equip(new Cure());
-    //character.equip(new Cure());
+    character.equip(new Cure());
+    character.equip(new Cure());
   }
   
   // Test unequip
@@ -145,11 +146,10 @@ void test_character() {
     printSubtitle("Test unequip");
     Character character("character");
     character.equip(new Ice());
-    //character.equip(new Cure());
-    //character.equip(new Cure());
+    character.equip(new Cure());
+    character.equip(new Cure());
     character.unequip(0);
     character.unequip(1);
-    character.unequip(2);
   }
 
   // Test use
@@ -157,8 +157,8 @@ void test_character() {
     printSubtitle("Test use");
     Character character("character");
     character.equip(new Ice());
-    //character.equip(new Cure());
-    //character.equip(new Cure());
+    character.equip(new Cure());
+    character.equip(new Cure());
     Character target("target");
     character.use(0, target);
     character.use(1, target);
@@ -194,6 +194,24 @@ void test_character() {
     Character target("target");
     character.use(0, target);
     character.unequip(0);
+  }
+
+  // Test unequip so many times
+  {
+    printSubtitle("Test unequip so many times");
+    Character character("character");
+    character.equip(new Cure());
+    character.equip(new Cure());
+    character.equip(new Cure());
+    character.equip(new Cure());
+    for (int i = 0; i < 10; i++) {
+      character.unequip(0);
+      character.unequip(1);
+      character.unequip(2);
+      character.equip(new Ice());
+      character.equip(new Ice());
+      character.equip(new Ice());
+    }
   }
 }
 
