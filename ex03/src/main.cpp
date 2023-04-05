@@ -71,6 +71,38 @@ void test_ice() {
   }
 }
 
+void test_cure() {
+  printTitle("Test Cure");
+  // Test Orthodox canonical form
+  {
+    printSubtitle("Test Orthodox canonical form");
+    Cure cure1;
+    Cure cure2(cure1);
+    Cure cure3 = cure1;
+    cure3 = cure1;
+  }
+  // Test use
+  {
+    printSubtitle("Test use");
+    Cure cure;
+    Character character("character");
+    cure.use(character);
+  }
+  // Test clone
+  {
+    printSubtitle("Test clone");
+    Cure cure;
+    AMateria* cure2 = cure.clone();
+    delete cure2;
+  }
+  // Test getType
+  {
+    printSubtitle("Test getType");
+    Cure cure;
+    std::cout << cure.getType() << std::endl;
+  }
+}
+
 void test_materia_source() {
   printTitle("Test MateriaSource");
   // Test Orthodox canonical form
@@ -220,7 +252,7 @@ void test_from_subject() {
 
   IMateriaSource* src = new MateriaSource();
   src->learnMateria(new Ice());
-  // src->learnMateria(new Cure()) ;
+  src->learnMateria(new Cure()) ;
 
   ICharacter* me = new Character("me");
 
@@ -242,6 +274,7 @@ void test_from_subject() {
 
 int main(void) {
   test_ice();
+  test_cure();
   test_materia_source();
   test_character();
   test_from_subject();

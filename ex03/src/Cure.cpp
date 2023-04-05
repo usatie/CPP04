@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Cure::Cure() : AMateria("ice") {
+Cure::Cure() : AMateria("cure") {
 #ifdef DEBUG
   std::cout << "[ Cure Default constructor called ]" << std::endl;
 #endif
