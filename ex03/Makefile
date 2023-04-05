@@ -27,6 +27,9 @@ fclean: clean
 
 re: clean all
 
+debug: CXXFLAGS += -D DEBUG
+debug: re
+
 run: $(NAME)
 	./$(NAME)
 
@@ -34,4 +37,4 @@ format:
 	clang-format -style=google $(SRCS) $(INCLUDES) -i
 	cppcheck --enable=all --inconclusive --suppress=missingIncludeSystem . -I .
 
-.PHONY: all clean fclean re run
+.PHONY: all clean fclean re run format debug

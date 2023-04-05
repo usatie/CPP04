@@ -1,6 +1,10 @@
 #include <iomanip>
 #include <iostream>
 
+#include "Character.hpp"
+#include "Ice.hpp"
+#include "MateriaSource.hpp"
+
 #define RESET "\033[m"
 #define GREEN "\033[0;32m"
 #define RED "\033[0;31m"
@@ -34,4 +38,32 @@ void printSubtitle(std::string const& subtitle) {
   std::cout << RESET << std::setfill(' ') << std::setw(0);
 }
 
-int main(void) {}
+void test_from_subject() {
+  printTitle("Test from sunject pdf");
+
+  IMateriaSource* src = new MateriaSource();
+  src->learnMateria(new Ice());
+  // src->learnMateria(new Cure()) ;
+
+  ICharacter* me = new Character("me");
+
+  AMateria* tmp;
+  tmp = src->createMateria("ice");
+  me->equip(tmp);
+  tmp = src->createMateria("cure");
+  me->equip(tmp);
+
+  ICharacter* bob = new Character("bob");
+
+  me->use(0, *bob);
+  me->use(1, *bob);
+
+  delete bob;
+  delete me;
+  delete src;
+}
+
+int main(void) {
+  test_from_subject();
+  return 0;
+}
