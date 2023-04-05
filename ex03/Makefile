@@ -31,7 +31,7 @@ debug: CXXFLAGS += -D DEBUG
 debug: re
 
 run: $(NAME)
-	./$(NAME)
+	leaks --atExit -q -- ./$(NAME)
 
 format:
 	clang-format -style=google $(SRCS) $(INCLUDES) -i

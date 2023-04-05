@@ -46,7 +46,8 @@ void MateriaSource::learnMateria(AMateria* m) {
 #endif
   for (int i = 0; i < 4; i++) {
     if (_materia[i] == NULL) {
-      _materia[i] = m->clone();
+      // From the subject PDF, it looks like clone is unnecessary here
+      _materia[i] = m; 
       return;
     }
   }
