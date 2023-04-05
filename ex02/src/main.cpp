@@ -180,6 +180,18 @@ void test_deep_copy() {
 
 void test_abstract_animal() {
   printTitle("Test Abstract Animal");
+  {
+    printSubtitle("Calling pure virtual function");
+    AAnimal* a = new Dog();
+    AAnimal* b = new Cat();
+
+    a->makeSound();
+    std::cout << "Calling pure virtual function from AAnimal" << std::endl;
+    a->AAnimal::makeSound();
+    b->makeSound();
+    std::cout << "Calling pure virtual function from AAnimal" << std::endl;
+    b->AAnimal::makeSound();
+  }
   // This function cause compile error, because AAnimal is abstract class
   // // Test Orthodox Canonical Form
   // {

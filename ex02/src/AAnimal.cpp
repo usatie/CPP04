@@ -19,7 +19,8 @@ AAnimal& AAnimal::operator=(const AAnimal& a) {
 
 AAnimal::~AAnimal() { std::cout << "[ AAnimal destructor called ]" << std::endl; }
 
-// This has no effect though, since it's a pure virtual function
+// This is a definition of the pure virtual function.
+// This can be called from the derived class via AAnimal::makeSound()
 void AAnimal::makeSound() const {
   std::cout << "[ AAnimal makeSound() called ]" << std::endl;
 }
