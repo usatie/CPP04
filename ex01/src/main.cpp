@@ -28,10 +28,24 @@ void printTitle(std::string const& title) {
   std::cout << RESET << std::setfill(' ') << std::setw(0);
 }
 
+// print test subtitle in white color surrounded by '-'
+void printSubtitle(std::string const& subtitle) {
+  // print '-'
+  std::cout << std::setfill('-') << std::setw(80) << "" << std::endl;
+  // print subtitle at the center
+  std::cout << std::setfill(' ') << std::setw(40 - subtitle.length() / 2) << ""
+            << subtitle << std::endl;
+  // print '-'
+  std::cout << std::setfill('-') << std::setw(80) << "" << std::endl;
+  // reset color
+  std::cout << RESET << std::setfill(' ') << std::setw(0);
+}
+
 void test_animal() {
+  printTitle("Test Animal");
   // Test Orthodox Canonical Form
   {
-    printTitle("Test Orthodox Canonical Form");
+    printSubtitle("Test Orthodox Canonical Form");
     Animal a;
     Animal b(a);
     Animal c;
@@ -39,7 +53,7 @@ void test_animal() {
   }
   // Test getType and makeSound
   {
-    printTitle("Test getType and makeSound");
+    printSubtitle("Test getType and makeSound");
     Animal a;
     std::cout << a.getType() << " " << std::endl;
     a.makeSound();
@@ -47,9 +61,10 @@ void test_animal() {
 }
 
 void test_dog() {
+  printTitle("Test Dog");
   // Test Orthodox Canonical Form
   {
-    printTitle("Test Orthodox Canonical Form");
+    printSubtitle("Test Orthodox Canonical Form");
     Dog a;
     Dog b(a);
     Dog c;
@@ -57,7 +72,7 @@ void test_dog() {
   }
   // Test getType and makeSound
   {
-    printTitle("Test getType and makeSound");
+    printSubtitle("Test getType and makeSound");
     Dog a;
     std::cout << a.getType() << " " << std::endl;
     a.makeSound();
@@ -65,9 +80,10 @@ void test_dog() {
 }
 
 void test_cat() {
+  printTitle("Test Cat");
   // Test Orthodox Canonical Form
   {
-    printTitle("Test Orthodox Canonical Form");
+    printSubtitle("Test Orthodox Canonical Form");
     Cat a;
     Cat b(a);
     Cat c;
@@ -75,7 +91,7 @@ void test_cat() {
   }
   // Test getType and makeSound
   {
-    printTitle("Test getType and makeSound");
+    printSubtitle("Test getType and makeSound");
     Cat a;
     std::cout << a.getType() << " " << std::endl;
     a.makeSound();
@@ -130,10 +146,34 @@ void test_array_of_animals() {
 // Test no memory leak
 void test_memory_leak() {
   printTitle("Test no memory leak");
-  Cat a;
-  std::cout << "Copy brain from a to b" << std::endl;
-  { Cat b(a); }
-  std::cout << "After b is destroyed" << std::endl;
+  // Test no memory leak in Cat
+  {
+    printSubtitle("Test no memory leak in Cat");
+    Cat a;
+    std::cout << "Copy brain from a to b" << std::endl;
+    { Cat b(a); }
+    std::cout << "After b is destroyed" << std::endl;
+  }
+  // Test no memory leak in Dog
+  {
+    printSubtitle("Test no memory leak in Dog");
+    Dog a;
+    std::cout << "Copy brain from a to b" << std::endl;
+    { Dog b(a); }
+    std::cout << "After b is destroyed" << std::endl;
+  }
+  // Test no memory leak in Animal *
+  {
+    printSubtitle("Test no memory leak in Animal *");
+    Cat* a = new Cat();
+    std::cout << "Copy brain from a to b" << std::endl;
+    {
+      Animal* b = new Cat(*a);
+      delete b;
+    }
+    std::cout << "After b is destroyed" << std::endl;
+    delete a;
+  }
 }
 
 // Test deep Copy
