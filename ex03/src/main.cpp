@@ -11,6 +11,11 @@
 #define RED "\033[0;31m"
 #define BOLD "\033[1m"
 
+// destructor of main() to check memory leak using leaks command
+__attribute__((destructor)) void detect_memory_leak() {
+  system("leaks program -q") ;
+}
+
 // print title in green color surrounded by '='
 void printTitle(std::string const& title) {
   // set color to green
